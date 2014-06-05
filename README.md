@@ -6,13 +6,14 @@ The software developed is available in this page. This software will help guide 
 #### Requirements
 
 - Python 2.7 and above
-
 - [Biopython](http://biopython.org/wiki/Main_Page)
+- [Bowtie](https://sourceforge.net/projects/bowtie-bio/files/bowtie/1.0.1)
 
 ----------------
 #### Install
 
 Download python and shell scritps 
+
 
 ----------------
 #### Usage
