@@ -17,32 +17,36 @@ Download python scritps
 Usage
 -----
 
-* **pattern_for_genome.sh**.  This script will search all the restriction sites from the input file (patternfilename) in every genome from the input file (genomefilename) 
 
-.. The input arguments are are: 
 
-  ..1. genomefilename  - name of file with table with two columns (1) species code and (2) link to whole genome fasta file 
+- **pattern_for_genome.sh**.  This shell script will search all the restriction sites from the input file (patternfilename) in every genome from the input file (genomefilename. As a result this scripts creates : 
+
+	The input arguments are are: 
+	- genomefilename: name of file with table with two columns (1) species code and (2) link to whole genome fasta file 
     (see example/test_pattern_for_genome/example_genome_table )
-  ..2. patternfilename - name of file with table with tow columns (1) restriction site regular expression and (2) restriction site name 
+    
+	- patternfilename - name of file with table with tow columns (1) restriction site regular expression and (2) restriction site name 
     (see example/test_pattern_for_genome/patternfilename)
 
-... > To run, just write on shell
+	To run, just write on shell
 
-  ...pattern_for_genome.sh genomefilename patternfilename
+	_patternforgenome.sh genomefilename patternfilename_
 
- 
-
-2. **genome_nucleotide_distrib.py**.
+- **genome_nucleotide_distrib.py**. This python module will 
 
 
-> The input files are:
+	 The input files are:
 
-  1. genomefilename - 
-  2. resultsfile 
+	- genomefilename 
+	- resultsfile 
 
-* python genome_nucleotide_distrib.py genomefilename resultsfile 
+	To run, just write on shell
 
-3. **sequence_probability.py**
+	_python genomenucleotidedistrib.py genomefilename resultsfile_
 
-* python sequence_probability.py distributionfile patternsfile 
+- **sequence_probability.py**
+
+	To run, just write on shell
+    
+	_python sequenceprobability.py distributionfile patternsfile_
 
