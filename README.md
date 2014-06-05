@@ -1,21 +1,22 @@
-Genome-wide predictability of restriction sites across the eukaryotic tree of life
------------------------------------------------------------------------------------
+### Genome-wide predictability of restriction sites across the eukaryotic tree of life
+
 The software developed is available in this page. This software will help guide the design of any study using RAD sequencing and related methods.
 
+----------------
+#### Requirements
 
-Requirements
-------------
-Python 2.7 and above
+- Python 2.7 and above
 
+- [Biopython](http://biopython.org/wiki/Main_Page)
 
-Install
--------
-Download python scritps 
+----------------
+#### Install
 
+Download python and shell scritps 
 
+----------------
+#### Usage
 
-Usage
------
 
 
 
