@@ -34,7 +34,7 @@ Download python and shell scritps
 
 	_patternforgenome.sh genomefilename patternfilename_
 
-- **genome_nucleotide_distrib.py**. This python module will 
+- **genome_nucleotide_distrib.py**. 
 
 
 	 The input files are:
