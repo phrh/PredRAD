@@ -17,21 +17,30 @@ Download python scritps
 Usage
 -----
 
-1.  The first script is **pattern_for_genome.sh**.  The input files are: 
+1. **pattern_for_genome.sh**.  The input arguments are are: 
+
+> this script will search all the restriction sites from the input file (patternfilename) in every genome from the input file (genomefilename) 
 
 
-* pattern_for_genome.sh genomefilename patternfilename
-
-  1. genomefilename  - table with two columns (1) species code and (2) link to whole genome fasta file 
+  1. genomefilename  - name of file with table with two columns (1) species code and (2) link to whole genome fasta file 
     (see example/test_pattern_for_genome/example_genome_table )
-  2. patternfilename - table with tow columns (1) restriction site regular expression and (2) restriction site name 
+  2. patternfilename - name of file with table with tow columns (1) restriction site regular expression and (2) restriction site name 
     (see example/test_pattern_for_genome/patternfilename)
 
+> To run, just write on shell
+
+... * pattern_for_genome.sh genomefilename patternfilename
+
+ 
+
+2. **genome_nucleotide_distrib.py**. The input files are:
+
+  1. genomefilename - 
+  2. resultsfile 
 
 * python genome_nucleotide_distrib.py genomefilename resultsfile 
 
-  1. genomefilename - 
-  2. results file
+
 
 * python sequence_probability.py distributionfile patternsfile 
 
