@@ -19,16 +19,16 @@ Usage
 
 * **pattern_for_genome.sh**.  This script will search all the restriction sites from the input file (patternfilename) in every genome from the input file (genomefilename) 
 
-> The input arguments are are: 
+.. The input arguments are are: 
 
-  .1. genomefilename  - name of file with table with two columns (1) species code and (2) link to whole genome fasta file 
+  ..1. genomefilename  - name of file with table with two columns (1) species code and (2) link to whole genome fasta file 
     (see example/test_pattern_for_genome/example_genome_table )
-  .2. patternfilename - name of file with table with tow columns (1) restriction site regular expression and (2) restriction site name 
+  ..2. patternfilename - name of file with table with tow columns (1) restriction site regular expression and (2) restriction site name 
     (see example/test_pattern_for_genome/patternfilename)
 
-> To run, just write on shell
+... > To run, just write on shell
 
-  pattern_for_genome.sh genomefilename patternfilename
+  ...pattern_for_genome.sh genomefilename patternfilename
 
  
 
