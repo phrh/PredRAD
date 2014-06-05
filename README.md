@@ -19,7 +19,7 @@ Usage
 
 
 
-- **pattern_for_genome.sh**.  This shell script will search all the restriction sites from the input file (patternfilename) in every genome from the input file (genomefilename. As a result this scripts creates : 
+- **pattern_for_genome.sh**.  This shell script will search all the restriction sites from the input file (patternfilename) in every genome from the input file (genomefilename). As a result this scripts creates  
 
 	The input arguments are are: 
 	- genomefilename: name of file with table with two columns (1) species code and (2) link to whole genome fasta file 
