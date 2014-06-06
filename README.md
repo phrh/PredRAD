@@ -21,7 +21,11 @@ Download python and shell scritps
 
 
 
-- **pattern_for_genome.sh**.  This shell script will search all the restriction sites from the input file (patternfilename) in every genome from the input file (genomefilename). As a result this scripts creates  
+- **pattern_for_genome.sh**.  This shell script will search all the restriction sites from the input file (patternfilename) in every genome from the input file (genomefilename). As a result the script provides the following files:
+ 
+	- ALL.aligned.txt, ALL.failed.txt, ALL.processed.txt, ALL.size.txt, ALL.suppressed.txt - each file with a table summarizing the corresponding to the bowtie output for each genome.
+	- ALL.count.txt - contains a table with the number of restriciton sites found in each genome
+	- ALL.size.txt - contains a table with the size of each genome
 
 	The input arguments are are: 
 	- genomefilename: name of file with table with two columns (1) species code and (2) link to whole genome fasta file 
