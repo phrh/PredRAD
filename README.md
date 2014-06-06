@@ -28,7 +28,7 @@ For the shell script (change execute permissions)
 	- ALL.count.txt - contains a table with the number of restriciton sites found in each genome
 	- ALL.size.txt - contains a table with the size of each genome
 
-	The input arguments are are: 
+	The input arguments are: 
 	- genomefilename: name of file with table with two columns (1) species code and (2) link to whole genome fasta file 
     (see test/genomeFileExample.txt)
     
