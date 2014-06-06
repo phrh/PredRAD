@@ -14,6 +14,7 @@ The software developed is available in this page. This software will help guide 
 
 Download python and shell scritps 
 
+For the shell script (change execute permissions)
 
 ----------------
 #### Usage
@@ -36,8 +37,9 @@ Download python and shell scritps
 
 	To run, just write on shell
 
-	_patternforgenome.sh genomefilename patternfilename_
+	_./patternforgenome.sh genomefilename patternfilename_
 
+----------------
 - **genome_nucleotide_distrib_paper.py**. This python script obtains the nucleotides, dinucleotide and trinucleotides distribution for each genome from the input file (genomefilename)
 
 
@@ -50,6 +52,8 @@ Download python and shell scritps
 	To run, just write on shell
 
 	_python genome_nucleotide_distrib_paper.py genomefilename resultsfile_
+
+----------------
 
 - **sequence_probability_paper.py**. This python script obtains the probability for each restriction site from the input file (patternfilename) in every genome considering nt, dint and trint frequencies (distributionfile). As a result the script provides the following files:
 
