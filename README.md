@@ -30,10 +30,9 @@ For the shell script (change execute permissions)
 
 	The input arguments are: 
 	- genomefilename: name of file with table with two columns (1) species code and (2) link to whole genome fasta file 
-    (see test/genomeFileExample.txt)
-    
+    (see  [test/genomeFileExample.txt](https://github.com/phrh/Genome-wide-predictability-of-restriction-sites-across-the-eukaryotic-tree-of-life/blob/master/test/genomeFileExample.txt))
 	- patternfilename - name of file with table with tow columns (1) restriction site regular expression and (2) restriction site name 
-    (see test/Patterns_list.txt)
+    (see [test/Patterns_list.txt](https://github.com/phrh/Genome-wide-predictability-of-restriction-sites-across-the-eukaryotic-tree-of-life/blob/master/test/Patterns_list.txt))
 
 	To run, just write on shell
 
@@ -46,7 +45,7 @@ For the shell script (change execute permissions)
 	 The input arguments are:
 
 	- genomefilename: name of file with table with two columns (1) species code and (2) link to whole genome fasta file 
-    (see test/genomeFileExample.txt)
+    (see  [test/genomeFileExample.txt](https://github.com/phrh/Genome-wide-predictability-of-restriction-sites-across-the-eukaryotic-tree-of-life/blob/master/test/genomeFileExample.txt))
 	- resultsfile : name of the outputfile 
 
 	To run, just write on shell
@@ -62,9 +61,9 @@ For the shell script (change execute permissions)
 	- $distributionfile$_trint - contains a table with the sequences probabilities (based on trinucleotides probabilities)
 
 	The input arguments are:
-	- distributionfile - output from genome_nucleotide_distrib_paper (see test/DistributionFile.txt)
+	- distributionfile - output from genome_nucleotide_distrib_paper (see [test/DistributionFile.txt](https://github.com/phrh/Genome-wide-predictability-of-restriction-sites-across-the-eukaryotic-tree-of-life/blob/master/test/DistributionFile.txt))
 	- patternfilename - name of file with table with tow columns (1) restriction site regular expression and (2) restriction site name 
-    (see test/Patterns_list.txt)
+    (see [test/Patterns_list.txt](https://github.com/phrh/Genome-wide-predictability-of-restriction-sites-across-the-eukaryotic-tree-of-life/blob/master/test/Patterns_list.txt))
 
 	To run, just write on shell
     
