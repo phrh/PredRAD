@@ -34,7 +34,7 @@ Download python and shell scritps
 
 	_patternforgenome.sh genomefilename patternfilename_
 
-- **genome_nucleotide_distrib.py**. 
+- **genome_nucleotide_distrib_paper.py**. 
 
 
 	 The input files are:
@@ -44,11 +44,11 @@ Download python and shell scritps
 
 	To run, just write on shell
 
-	_python genomenucleotidedistrib.py genomefilename resultsfile_
+	_python genome_nucleotide_distrib_paper.py genomefilename resultsfile_
 
-- **sequence_probability.py**
+- **sequence_probability_paper.py**
 
 	To run, just write on shell
     
-	_python sequenceprobability.py distributionfile patternsfile_
+	_python sequence_probability_paper.py distributionfile patternsfile_
 
