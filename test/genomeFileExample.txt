@@ -1,0 +1,2 @@
+Plaviv	http://www.ncbi.nlm.nih.gov/Traces/wgs/?download=AAKM01
+Babbov	http://www.ncbi.nlm.nih.gov/Traces/wgs/?download=AAXT01
