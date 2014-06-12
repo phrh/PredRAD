@@ -1,5 +1,16 @@
+# PredRAD - guides the design of any study using RAD sequencing and related methods.
+#
+# Created by Santiago Herrera and Paula H. Reyes-Herrera on 11 June 2014
+# Copyright (c) 2014 Santiago Herrera and Paula H. Reyes-Herrera. All rights reserved.
+# 
+# This file is part of PredRAD.
+#
+# PredRAD is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, version 2.
+#-------------------------------------------------------------------------------------
 #!/usr/bin/env python
-# Usage: python genome_nucleotide_distrib_paper.py genomefilename resultsfile
+# Usage: python obtain_nucleotides_model.py genomefilename resultsfile
 
 #-------------------------------FUNCTIONS-LIST----------------------------------------
 # writelog(filename,text)

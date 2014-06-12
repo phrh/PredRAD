@@ -1,5 +1,16 @@
+# PredRAD - guides the design of any study using RAD sequencing and related methods.
+#
+# Created by Santiago Herrera and Paula H. Reyes-Herrera on 11 June 2014
+# Copyright (c) 2014 Santiago Herrera and Paula H. Reyes-Herrera. All rights reserved.
+# 
+# This file is part of PredRAD.
+#
+# PredRAD is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, version 2.
+#-------------------------------------------------------------------------------------
 #!/bin/bash
-# Usage:   ./pattern_for_genome_paper.sh genomefilename patternfilename
+# Usage:   ./restriction_site_search.sh genomefilename patternfilename
 # Arguments: 
 # 	$1 genomefile
 # 	$2 patternfile
@@ -60,7 +71,7 @@ function process_inputfile(){
 			if [ $size -lt 100 ]
 			then 
 				echo "Inside if - then"
-				writelog "fasta $i size $size" 	pattern_for_genome.log
+				writelog "fasta $i size $size" 	 restriction_site_search.log
 				echo "size < 100 in $i"
 				rm $2.fsa.$i.gz
 			else
@@ -77,14 +88,14 @@ function process_inputfile(){
 			size=$(stat -c %s $2.fsa.$i.gz)
 
 		done;
-	writelog "fasta found: $2" pattern_for_genome.log
+	writelog "fasta found: $2"  restriction_site_search.log
 	cat $2.fsa.* > $2.fasta
 	rm $2.fsa.*
 	tr '[:lower:]' '[:upper:]' < $2.fasta > $2.UP
 	rm $2.fasta
 	else
 			#other site
-	writelog "fasta not found: $2" pattern_for_genome.log
+	writelog "fasta not found: $2"  restriction_site_search.log
 	fi;
  
 }
@@ -199,12 +210,12 @@ function extract_bowtie_stats_for_all(){
 
 #$1 genomefile
 #$2 patternfile
-writelog "--------------------" pattern_for_genome.log
+writelog "--------------------"  restriction_site_search.log
 # Create directories to store the bowtie databases and the aligned tags against the genome
 mkdir bowtie_db aligned FASTA
 tempfolder="TEMP_$(date +"%m_%d_%y_%H_%M")"
 mkdir $tempfolder
-writelog "Input files: $1 $2" pattern_for_genome.log
+writelog "Input files: $1 $2"  restriction_site_search.log
 patternfile=$2;
 genomefile=$1;
 # Sort patterns file
@@ -216,7 +227,7 @@ check_inputfile $genomefile  $tempfolder
 # For each assembly file
 while read scode url; 
 	do
-	writelog "$scode process starts" pattern_for_genome.log
+	writelog "$scode process starts"  restriction_site_search.log
 	# Obtain and process each assembly file
 	process_inputfile $url $scode;
 	# Perform initial counts of patterns
@@ -225,25 +236,25 @@ while read scode url;
 	cd bowtie_db
 	bowtie-build -f ../$scode.UP $scode.Genome
 	cd ..
-	writelog "$scode processed files and bowtie index done" pattern_for_genome.log
+	writelog "$scode processed files and bowtie index done"  restriction_site_search.log
 	# Perform in silico RAD sequencing and map reads back to the genome assembly
 	while read pattern patternname; 
 		do 
 		pattern_upstream_downstream $scode $pattern $patternname $tempfolder; 		
-		writelog "bowtie $scode $patternname" pattern_for_genome.log
+		writelog "bowtie $scode $patternname"  restriction_site_search.log
 		eval "bowtie -v 3 --best --strata -m 1 -p 8 -f ./bowtie_db/$scode.Genome ./FASTA/$scode.$patternname.fasta ./aligned/$scode.$patternname.bowtie >> $tempfolder/$scode.$patternname.stats.txt 2>&1";
 # Parse alignment outputs
 		extract_bowtie_stats $scode $pattern $patternname $tempfolder;
 	done < $patternfile;
 	extract_bowtie_stats_by_genome $scode $tempfolder
-	writelog "$scode process done"	pattern_for_genome.log
+	writelog "$scode process done"	 restriction_site_search.log
 	rm -rf aligned/* bowtie_db/* FASTA/*
 	rm $scode.UP
 done < $genomefile
 while read scode url;
 	do 
 	extract_bowtie_stats_for_all $scode $tempfolder
-	writelog "stats for all done"	pattern_for_genome.log
+	writelog "stats for all done"	 restriction_site_search.log
 done < $genomefile
 
 
