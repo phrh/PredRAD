@@ -1,4 +1,4 @@
-### Genome-wide predictability of restriction sites across the eukaryotic tree of life
+### predRAD
 
 The software developed is available in this page. This software will help guide the design of any study using RAD sequencing and related methods.
 
