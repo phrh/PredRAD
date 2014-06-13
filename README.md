@@ -22,7 +22,7 @@ For the shell script (change execute permissions)
 
 
 
-- **pattern_for_genome_paper.sh**.  This shell script will search all the restriction sites from the input file (patternfilename) in every genome from the input file (genomefilename). As a result the script provides the following files:
+- **restriction_site_search.sh**.  This shell script will search all the restriction sites from the input file (patternfilename) in every genome from the input file (genomefilename). As a result the script provides the following files:
  
 	- ALL.aligned.txt, ALL.failed.txt, ALL.processed.txt,  ALL.suppressed.txt - each file with a table summarizing bowtie output(reads aligned, failed, processed and suppressed) for each genome.
 	- ALL.count.txt - contains a table with the number of restriciton sites found in each genome
@@ -36,10 +36,10 @@ For the shell script (change execute permissions)
 
 	To run, just write on shell
 
-	_./patternforgenome.sh genomefilename patternfilename_
+	_./restriction_site_search.sh genomefilename patternfilename_
 
 ----------------
-- **genome_nucleotide_distrib_paper.py**. This python script obtains the nucleotides, dinucleotide and trinucleotides distribution for each genome from the input file (genomefilename)
+- **obtain_nucleotides_model.py**. This python script obtains the nucleotides, dinucleotide and trinucleotides distribution for each genome from the input file (genomefilename)
 
 
 	 The input arguments are:
@@ -50,11 +50,11 @@ For the shell script (change execute permissions)
 
 	To run, just write on shell
 
-	_python genome_nucleotide_distrib_paper.py genomefilename resultsfile_
+	_python obtain_nucleotides_model.py genomefilename resultsfile_
 
 ----------------
 
-- **sequence_probability_paper.py**. This python script obtains the probability for each restriction site from the input file (patternfilename) in every genome considering nt, dint and trint frequencies (distributionfile). As a result the script provides the following files:
+- **sequence_probability.py**. This python script obtains the probability for each restriction site from the input file (patternfilename) in every genome considering nt, dint and trint frequencies (distributionfile). As a result the script provides the following files:
 
 	- $distributionfile$_nt    - contains a table with the sequences probabilities (based on nucleotide probabilities)
 	- $distributionfile$_dint  - contains a table with the sequences probabilities (based on dinucleotides probabilities)
@@ -67,5 +67,5 @@ For the shell script (change execute permissions)
 
 	To run, just write on shell
     
-	_python sequence_probability_paper.py distributionfile patternsfile_
+	_python sequence_probability.py distributionfile patternsfile_
 
