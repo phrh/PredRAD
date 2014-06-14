@@ -475,7 +475,7 @@ row.names(expdifreq) <- expdifreq$id
 expdifreq_frame<- expdifreq[,2:19]
 expdifreq_matrix <- data.matrix(expdifreq_frame)
 
-#Calculate expdiected number of cut sites with each enzyme for di
+#Calculate expected number of cut sites with each enzyme for di
 AgeI_expdi<-AgeI_expdifreq*genome_size
 ApoI_expdi<-ApoI_expdifreq*genome_size
 BsrFI_expdi<-BsrFI_expdifreq*genome_size
@@ -494,10 +494,10 @@ PciI_expdi<-PciI_expdifreq*genome_size
 PstI_expdi<-PstI_expdifreq*genome_size
 SbfI_expdi<-SbfI_expdifreq*genome_size
 SgrAI_expdi<-SgrAI_expdifreq*genome_size
-expdiected<-cbind(ids,AgeI_expdi,ApoI_expdi,BsrFI_expdi,EcoRI_expdi,FatI_expdi,KpnI_expdi,MluCI_expdi,MseI_expdi,MspI_expdi,NcoI_expdi,NgoMIV_expdi,NotI_expdi,NsiI_expdi,NspI_expdi,PciI_expdi,PstI_expdi,SbfI_expdi,SgrAI_expdi)
-colnames(expdiected) <- c("id","AgeI","ApoI","BsrFI","EcoRI","FatI","KpnI","MluCI","MseI","MspI","NcoI","NgoMIV","NotI","NsiI","NspI","PciI","PstI","SbfI","SgrAI")
-row.names(expdiected) <- expdiected$id
-expdi_frame<- expdiected[,2:19]
+expected<-cbind(ids,AgeI_expdi,ApoI_expdi,BsrFI_expdi,EcoRI_expdi,FatI_expdi,KpnI_expdi,MluCI_expdi,MseI_expdi,MspI_expdi,NcoI_expdi,NgoMIV_expdi,NotI_expdi,NsiI_expdi,NspI_expdi,PciI_expdi,PstI_expdi,SbfI_expdi,SgrAI_expdi)
+colnames(expected) <- c("id","AgeI","ApoI","BsrFI","EcoRI","FatI","KpnI","MluCI","MseI","MspI","NcoI","NgoMIV","NotI","NsiI","NspI","PciI","PstI","SbfI","SgrAI")
+row.names(expected) <- expected$id
+expdi_frame<- expected[,2:19]
 expdi_matrix <- data.matrix(expdi_frame)
 
 #Expected frequency of cut sites with each enzyme for tri
@@ -657,7 +657,7 @@ row.names(percmono) <- percmono$id
 percmono_frame<- percmono[,2:19]
 percmono_matrix <- data.matrix(percmono_frame)
 
-#Calculate bias index for each enzyme ((observed-expdiected)/expdiected) for di
+#Calculate bias index for each enzyme ((observed-expected)/expected) for di
 AgeI_percdi<-(AgeI_obsfreq-AgeI_expdifreq)/AgeI_expdifreq
 ApoI_percdi<-(ApoI_obsfreq-ApoI_expdifreq)/ApoI_expdifreq
 BsrFI_percdi<-(BsrFI_obsfreq-BsrFI_expdifreq)/BsrFI_expdifreq
