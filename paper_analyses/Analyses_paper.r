@@ -607,7 +607,7 @@ log_obsfreq_matrix_perMb[274,12]<-0.0
 log_obsfreq_matrix_perMb[433,12]<-0.0
 
 
-#Calculate bias index for each enzyme ((observed-expgcected)/expgcected) for gc
+#Calculate similarity index for each enzyme ((observed-expgcected)/expgcected) for gc
 AgeI_percgc<-(AgeI_obsfreq-AgeI_expgcfreq)/AgeI_expgcfreq
 ApoI_percgc<-(ApoI_obsfreq-ApoI_expgcfreq)/ApoI_expgcfreq
 BsrFI_percgc<-(BsrFI_obsfreq-BsrFI_expgcfreq)/BsrFI_expgcfreq
@@ -632,7 +632,7 @@ row.names(percgc) <- percgc$id
 percgc_frame<- percgc[,2:19]
 percgc_matrix <- data.matrix(percgc_frame)
 
-#Calculate bias index for each enzyme ((observed-expected)/expected) for mono
+#Calculate similarity index for each enzyme ((observed-expected)/expected) for mono
 AgeI_percmono<-(AgeI_obsfreq-AgeI_expmonofreq)/AgeI_expmonofreq
 ApoI_percmono<-(ApoI_obsfreq-ApoI_expmonofreq)/ApoI_expmonofreq
 BsrFI_percmono<-(BsrFI_obsfreq-BsrFI_expmonofreq)/BsrFI_expmonofreq
@@ -657,7 +657,7 @@ row.names(percmono) <- percmono$id
 percmono_frame<- percmono[,2:19]
 percmono_matrix <- data.matrix(percmono_frame)
 
-#Calculate bias index for each enzyme ((observed-expected)/expected) for di
+#Calculate similarity index for each enzyme ((observed-expected)/expected) for di
 AgeI_percdi<-(AgeI_obsfreq-AgeI_expdifreq)/AgeI_expdifreq
 ApoI_percdi<-(ApoI_obsfreq-ApoI_expdifreq)/ApoI_expdifreq
 BsrFI_percdi<-(BsrFI_obsfreq-BsrFI_expdifreq)/BsrFI_expdifreq
@@ -682,7 +682,7 @@ row.names(percdi) <- percdi$id
 percdi_frame<- percdi[,2:19]
 percdi_matrix <- data.matrix(percdi_frame)
 
-#Calculate bias index for each enzyme ((observed-exptriected)/exptriected) for tri
+#Calculate similarity index for each enzyme ((observed-exptriected)/exptriected) for tri
 AgeI_perctri<-(AgeI_obsfreq-AgeI_exptrifreq)/AgeI_exptrifreq
 ApoI_perctri<-(ApoI_obsfreq-ApoI_exptrifreq)/ApoI_exptrifreq
 BsrFI_perctri<-(BsrFI_obsfreq-BsrFI_exptrifreq)/BsrFI_exptrifreq
