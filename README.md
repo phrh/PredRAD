@@ -4,7 +4,11 @@ High-throughput sequencing of reduced representation libraries obtained through 
 
 For the design of a study using RAD-seq, or a related methodology, there are two general fundamental questions that researchers face: i) what is the best restriction enzyme to use to obtain a desired number of RAD tags in the organism of interest? And ii) how many markers can be obtained with a particular enzyme in the organism of interest? This software pipeline will allow any researcher to obtain an approximate answer to these questions and will help guide the design of any study using RAD sequencing and related methods.
 
-This Git contains the software code and output results from [Herrera S., P.H. Reyes-Herrera & T.M. Shank (2014) Genome-wide predictability of restriction sites across the eukaryotic tree of life. bioRxiv preprint doi: http://dx.doi.org/10.1101/007781](biorxiv.org/content/early/2014/08/08/007781)
+This Git contains the software code and output results from [Herrera S., P.H. Reyes-Herrera & T.M. Shank (2015) Predicting RAD-seq Marker Numbers across the Eukaryotic Tree of Life.](https://gbe.oxfordjournals.org/content/7/12/3207.full)
+
+
+
+
 
 ----------------
 #### Requirements
