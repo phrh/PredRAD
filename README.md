@@ -30,21 +30,24 @@ For the shell script (change execute permissions using chmod u+x)
 
 
 
-- **restriction_site_search.sh**.  This shell script will search all the restriction sites from the input file (patternfilename) in every genome from the input file (genomefilename). As a result the script provides the following files:
+- **restriction_site_search.sh**.  This shell script will search all the restriction sites from the file (patternfilename) in every genome from the input file (genomefilename).  As a result the script provides the following files:
  
-	- ALL.aligned.txt, ALL.failed.txt, ALL.processed.txt,  ALL.suppressed.txt - each file with a table summarizing bowtie output(reads aligned, failed, processed and suppressed) for each genome.
 	- ALL.count.txt - contains a table with the number of restriciton sites found in each genome
 	- ALL.size.txt - contains a table with the size of each genome
+	- If bowtieflag is equal to YES then it provides the following files: ALL.aligned.txt, ALL.failed.txt, ALL.processed.txt,  ALL.suppressed.txt - each file with a table summarizing bowtie output(reads aligned, failed, processed and suppressed) for each genome.
 
-	The input arguments are: 
-	- genomefilename: name of file with table with two columns (1) species code and (2) link to whole genome fasta file 
-    (see  [test/genomeFileExample.txt](https://github.com/phrh/Genome-wide-predictability-of-restriction-sites-across-the-eukaryotic-tree-of-life/blob/master/test/genomeFileExample.txt))
-	- patternfilename - name of file with table with tow columns (1) restriction site regular expression and (2) restriction site name 
+	The input arguments are:
+	- parametersfilename: name of file with four parameters (see [test/params.txt](https://github.com/phrh/PredRAD/blob/master/test/params.txt))
+	  * genomefilename: name of file with table with two columns (1) species code and (2) link to whole genome fasta file or path to fasta file 
+    (for genome file example with url see [test/genomeFileExample.txt](https://github.com/phrh/Genome-wide-predictability-of-restriction-sites-across-the-eukaryotic-tree-of-life/blob/master/test/genomeFileExample.txt), for file with localfile path see [test/genomeFileExample_localfile.txt](https://github.com/phrh/PredRAD/blob/master/test/genomeFileExample_localfile.txt))
+	  * patternfilename - name of file with table with tow columns (1) restriction site regular expression and (2) restriction site name 
     (see [test/Patterns_list.txt](https://github.com/phrh/Genome-wide-predictability-of-restriction-sites-across-the-eukaryotic-tree-of-life/blob/master/test/Patterns_list.txt))
+	  * bowtieflag equals YES (default value)  to use bowtie to align. Any other value if you do not want to use bowtie.
+	  * localfile flag equals NO (default value) to download the fasta files. If the flag equals YES, the program will search for a localfile in the indicated path  
 
 	To run, just write on shell
 
-	_./restriction_site_search.sh genomefilename patternfilename_
+	_./restriction_site_search.sh parametersfilename_
 
 ----------------
 - **obtain_nucleotides_model.py**. This python script obtains the nucleotides, dinucleotide and trinucleotides distribution for each genome from the input file (genomefilename)
