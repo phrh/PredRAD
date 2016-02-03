@@ -1,0 +1,5 @@
+patternfile=test/Patterns_list.txt
+genomefile=test/genomeFileExample.txt
+localfile=NO
+bowtieflag=YES
+

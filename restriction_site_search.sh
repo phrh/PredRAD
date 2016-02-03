@@ -1,3 +1,4 @@
+#!/bin/bash
 # PredRAD - guides the design of any study using RAD sequencing and related methods.
 #
 # Created by Santiago Herrera and Paula H. Reyes-Herrera on 11 June 2014
@@ -8,12 +9,14 @@
 # PredRAD is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, version 2.
+# Please cite :      Santiago Herrera, Paula H. Reyes-Herrera, and Timothy M. Shank.  Predicting RAD-seq Marker Numbers across the Eukaryotic Tree of Life. Genome Biol Evol (2015) Vol. 7 3207-3225 
 #-------------------------------------------------------------------------------------
-#!/bin/bash
-# Usage:   ./restriction_site_search.sh genomefilename patternfilename
+# Usage:   ./restriction_site_search.sh genomefilename patternfilename localfile
 # Arguments: 
 # 	$1 genomefile
 # 	$2 patternfile
+#       $3 localfile flag (Yes - if the genome file contains paths instead of url, No - otherwise) default value NO
+#	$4 bowtieflag (Yes to use bowtie to align and get bowtie statistics, No - otherwise) default value YES 
 #-------------------------------FUNCTIONS-LIST----------------------------------------
 # pattern_upstream_downstream
 # process_inputfile
@@ -34,18 +37,20 @@ function check_inputfile(){
 	#Arguments:
 	# $1 file name 
 	# $2 temporary folder name
-	# This function checks for line break at end of file and add if missing
-	od -c $1 | tail -2 > $2/last_characters.txt
+	# This function checks for line break at end of file and add if missing and Remove blank lines
+	filename=$(basename $1);
+	od -c $1 | tail -2 > $2/last_characters.txt;
 	cat $2/last_characters.txt |while read number character; 
 		do 
 		if [ "$character" != "\n" ]
 		then 
 			while read line || [ -n "$line" ]; 
 			do echo $line; 
-			done < $1 > $2/$1.corrected
-			cp $2/$1.corrected $1
+			done < $1 > $2/$filename.corrected;
+			cp $2/$filename.corrected $1;
 		fi; 
-	done
+	done;
+	sed -i '/^[[:space:]]*$/d' $1;
 }
 
 function process_inputfile(){
@@ -78,8 +83,8 @@ function process_inputfile(){
 				echo "Inside else"
 				echo "gunzip $2.fsa.$i.gz"
 				gunzip $2.fsa.$i.gz
-				echo "rm $2.fsa.$i.gz"
-				rm $2.fsa.$i.gz
+				#echo "rm $2.fsa.$i.gz"
+				#rm $2.fsa.$i.gz
 			fi;
 			echo " Increasing i -> $i"					
 			i=$((i+1))		
@@ -193,71 +198,115 @@ function extract_bowtie_stats_for_all(){
 	#Arguments: 
 	scode=$1
 	tempfolder=$2
-	# This function concatenates the outputs of bowtie alignments for all enzymes for all genomes
-	echo -e -n "\n$scode\t" >> ALL.processed.txt
-	while read data; do echo -n -e "$data\t" >> ALL.processed.txt; done < $tempfolder/$scode.processed.txt
-	echo -e -n "\n$scode\t" >> ALL.aligned.txt
-	while read data; do echo -n -e "$data\t" >> ALL.aligned.txt; done < $tempfolder/$scode.aligned.txt
-	echo -e -n "\n$scode\t" >> ALL.failed.txt
-	while read data; do echo -n -e "$data\t" >> ALL.failed.txt; done < $tempfolder/$scode.failed.txt
-	echo -e -n "\n$scode\t" >> ALL.suppressed.txt
-	while read data; do echo -n -e "$data\t" >> ALL.suppressed.txt; done < $tempfolder/$scode.suppressed.txt
+	bowtieflag=$3
+	# This function concatenates the outputs of bowtie alignments for all enzymes for all genomes - and $scode.count.txt
+	if [ "$bowtieflag" == "YES" ]
+		then
+		echo -e -n "\n$scode\t" >> ALL.processed.txt
+		while read data; do echo -n -e "$data\t" >> ALL.processed.txt; done < $tempfolder/$scode.processed.txt
+		echo -e -n "\n$scode\t" >> ALL.aligned.txt
+		while read data; do echo -n -e "$data\t" >> ALL.aligned.txt; done < $tempfolder/$scode.aligned.txt
+		echo -e -n "\n$scode\t" >> ALL.failed.txt
+		while read data; do echo -n -e "$data\t" >> ALL.failed.txt; done < $tempfolder/$scode.failed.txt
+		echo -e -n "\n$scode\t" >> ALL.suppressed.txt
+		while read data; do echo -n -e "$data\t" >> ALL.suppressed.txt; done < $tempfolder/$scode.suppressed.txt
+	fi;	
 	echo -e -n "\n$scode\t" >> ALL.count.txt
 	while read data; do echo -n -e "$data\t" >> ALL.count.txt; done < $tempfolder/$scode.count.txt	
 }
 
 #---------------------------------MAIN-------------------------------------------
-
-#$1 genomefile
-#$2 patternfile
 writelog "--------------------"  restriction_site_search.log
 # Create directories to store the bowtie databases and the aligned tags against the genome
+# default values flags
+localfile="NO"
+bowtieflag="YES"
 mkdir bowtie_db aligned FASTA
 tempfolder="TEMP_$(date +"%m_%d_%y_%H_%M")"
 mkdir $tempfolder
-writelog "Input files: $1 $2"  restriction_site_search.log
-patternfile=$2;
-genomefile=$1;
+paramsfile="$1"
+. ./$paramsfile
+writelog "Input arguments: patternfile $patternfile genomefile $genomefile localfile $localfile bowtieflag $bowtieflag"  restriction_site_search.log
+# check if files are in other directory and copy to temp  directory
+# get filename (not the path)
+patternfilename=$(basename $patternfile)
+#cp $patternfile $tempfolder/$patternfilename
 # Sort patterns file
-sort -k 2 $patternfile > $tempfolder/$patternfile.sort
-cp $tempfolder/$patternfile.sort $patternfile	
+sort -k 2 $patternfile > $tempfolder/$patternfilename.sort
+cp $tempfolder/$patternfilename.sort $patternfile	
 # Check format of input files
 check_inputfile $patternfile $tempfolder
 check_inputfile $genomefile  $tempfolder
+# flags
+localfile="$(echo -e "${localfile}" | tr -d '[[:space:]]')"
+bowtieflag="$(echo -e "${bowtieflag}" | tr -d '[[:space:]]')"
+localfile=$(echo $localfile | tr '[a-z]' '[A-Z]')
+bowtieflag=$(echo $bowtieflag | tr '[a-z]' '[A-Z]')
 # For each assembly file
 while read scode url; 
 	do
 	writelog "$scode process starts"  restriction_site_search.log
 	# Obtain and process each assembly file
-	process_inputfile $url $scode;
+	# check if there is a local fasta file or we need to download the file from ncbi
+	if [ "$localfile" == "YES" ]
+	then 
+		tr '[:lower:]' '[:upper:]' < $url > $scode.UP
+		# obtain .up file from local file
+		writelog "local file $url converted to $scode.UP"  restriction_site_search.log
+	else
+		process_inputfile $url $scode;
+	fi;
+	#check scode.UP content
+	size=$(stat -c %s $scode.UP)
+	if [ "$?" != "0" ]; 
+		then
+		#echo "Problem with $scode.UP"
+		writelog "Error with $scode.UP size"  restriction_site_search.log
+		exit 1
+	fi;	
 	# Perform initial counts of patterns
 	count_nt_sites $scode $patternfile $tempfolder ;
 	# Build bowtie index database for the genome
-	cd bowtie_db
-	bowtie-build -f ../$scode.UP $scode.Genome
-	cd ..
-	writelog "$scode processed files and bowtie index done"  restriction_site_search.log
+	if [ "$bowtieflag" == "YES" ]
+		then
+		cd bowtie_db
+		bowtie-build -f ../$scode.UP $scode.Genome
+		if [ "$?" != "0" ]; 
+			then
+			echo "bowtie-build cannot find input file $url or $scode.UP"
+			writelog "bowtie-build cannot find input file $url or $scode.UP"  restriction_site_search.log
+			exit 1
+		fi;
+		cd ..
+		writelog "$scode processed files and bowtie index done"  restriction_site_search.log
+	fi;	
 	# Perform in silico RAD sequencing and map reads back to the genome assembly
 	while read pattern patternname; 
 		do 
-		pattern_upstream_downstream $scode $pattern $patternname $tempfolder; 		
-		writelog "bowtie $scode $patternname"  restriction_site_search.log
-		eval "bowtie -v 3 --best --strata -m 1 -p 8 -f ./bowtie_db/$scode.Genome ./FASTA/$scode.$patternname.fasta ./aligned/$scode.$patternname.bowtie >> $tempfolder/$scode.$patternname.stats.txt 2>&1";
+		pattern_upstream_downstream $scode $pattern $patternname $tempfolder; 	
+		if [ "$bowtieflag" == "YES" ]
+			then
+			writelog "bowtie $scode $patternname"  restriction_site_search.log
+			eval "bowtie -v 3 --best --strata -m 1 -p 8 -f ./bowtie_db/$scode.Genome ./FASTA/$scode.$patternname.fasta ./aligned/$scode.$patternname.bowtie >> $tempfolder/$scode.$patternname.stats.txt 2>&1";
 # Parse alignment outputs
 		extract_bowtie_stats $scode $pattern $patternname $tempfolder;
+		fi;
 	done < $patternfile;
-	extract_bowtie_stats_by_genome $scode $tempfolder
-	writelog "$scode process done"	 restriction_site_search.log
+	if [ "$bowtieflag" == "YES" ]
+		then
+			extract_bowtie_stats_by_genome $scode $tempfolder
+			writelog "$scode process done"	 restriction_site_search.log
+	fi;	
 	rm -rf aligned/* bowtie_db/* FASTA/*
+#	rm -rf aligned/ bowtie_db/ FASTA/
 	rm $scode.UP
 done < $genomefile
 while read scode url;
 	do 
-	extract_bowtie_stats_for_all $scode $tempfolder
+	extract_bowtie_stats_for_all $scode $tempfolder $bowtieflag
 	writelog "stats for all done"	 restriction_site_search.log
 done < $genomefile
-
-
+rm -rf aligned/ bowtie_db/ FASTA/
 rm -R $tempfolder
 
 
