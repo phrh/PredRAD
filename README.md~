@@ -55,7 +55,7 @@ For the shell script (change execute permissions using chmod u+x)
 
 	 The input arguments are:
 
-	- genomefilename: name of file with table with two columns (1) species code and (2) link to whole genome fasta file or path to fasta file.(for genome file example with url see [test/genomeFileExample.txt](https://github.com/phrh/Genome-wide-predictability-of-restriction-sites-across-the-eukaryotic-tree-of-life/blob/master/test/genomeFileExample.txt), for file with localfile path see [test/genomeFileExample_localfile.txt](https://github.com/phrh/PredRAD/blob/master/test/genomeFileExample_localfile.txt))
+	- genomefilename: name of file with table with two columns (1) species code and (2) link to whole genome fasta file or path to fasta file.(for genome file example with url see [test/genomeFileExample_2.txt](https://github.com/phrh/Genome-wide-predictability-of-restriction-sites-across-the-eukaryotic-tree-of-life/blob/master/test/genomeFileExample_2.txt), for file with localfile path see [test/genomeFileExample_localfile.txt](https://github.com/phrh/PredRAD/blob/master/test/genomeFileExample_localfile.txt))
 	- resultsfile : name of the outputfile
 	- localfileflag : yes if the files are in local, no otherwise.
 

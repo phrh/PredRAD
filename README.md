@@ -64,6 +64,8 @@ For the shell script (change execute permissions using chmod u+x)
 	_python obtain_nucleotides_model.py genomefilename resultsfile localfileflag_
 
 For details of events that occur once the script runs, please check the .log file.
+
+
 ----------------
 
 - **sequence_probability.py**. This python script obtains the probability for each restriction site from the input file (patternfilename) in every genome considering nt, dint and trint frequencies (distributionfile). As a result the script provides the following files:
