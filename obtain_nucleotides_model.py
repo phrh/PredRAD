@@ -102,13 +102,22 @@ def process_inputfile(url, scode, logfile):
 			os.system(commandwget)
 	
 
-def count_nt_freq(scode,filenameall):
+def count_nt_freq(scode,url,filenameall,logfile,localfileflag):
 #Importing libraries	
 	from Bio import SeqIO
 	import re
 	import os
 #handling sequences from fasta file
-	handle = open(scode+'.fasta','rU')
+	if localfileflag == 'NO' :
+		handle = open(scode+'.fasta','rU')
+	else :
+		if localfileflag == 'YES' :
+			try:
+				handle = open(url,'rU')
+			except IOError:
+				writelog(logfile,'cannot open '+url)
+			else:
+				writelog(logfile,'succesfully open '+url)	
 	countA=0
 	countT=0
 	countG=0
@@ -287,7 +296,6 @@ def count_nt_freq(scode,filenameall):
 		countTTC=countTTC+record.seq.upper().count('TTC')
 		countTTT=countTTT+record.seq.upper().count('TTT')
 	handle.close()
-	os.remove(scode+'.fasta')
 #printing into file
 	f = open(filenameall,'a')
 	text=scode+'\t'+str(countnt)+'\t'+str(countATCG)
@@ -310,36 +318,49 @@ def count_nt_freq(scode,filenameall):
 	'\t'+str(countTCC)+'\t'+str(countTCT)+'\t'+str(countTTA)+'\t'+str(countTTG)+'\t'+str(countTTC)+ \
 	'\t'+str(countTTT)+'\n'
 	f.write(text)
+	if localfileflag == 'NO' :
+                os.remove(scode+'.fasta')
+	f.close()
 
 
 #MAIN PROGRAM
-def int_main(genomefile,resultfile):
+def int_main(genomefile,resultfile,localfileflag):
 	import os
 	from datetime import date
 	now = date.today()	
 	logfile='genome_nucleotide_distribution_'+str(now)
 	writelog(logfile,"--------------------")
-	writelog(logfile,"Input file:"+genomefile+' '+resultfile) 
-	writelog(resultfile,'Species\tnt\tAGCT\tA\tG\tC\tT\tN\tAA\tAG\tAC\tAT\tGA\tGG\
+	writelog(logfile,"Input file:"+genomefile+' '+resultfile)
+	localfileflag=str.upper(localfileflag.strip())
+	writelog(logfile,"Input flag:"+localfileflag) 
+	f = open(resultfile, 'a+')
+	f.write('Species\tnt\tAGCT\tA\tG\tC\tT\tN\tAA\tAG\tAC\tAT\tGA\tGG\
 	GC\tGT\tCA\tCG\tCC\tCT\tTA\tTG\tTC\tTT\tAAA\tAAG\tAAC\tAAT\tAGA\tAGG\tAGC\tAGT\tACA\
 	ACG\tACC\tACT\tATA\tATG\tATC\tATT\tGAA\tGAG\tGAC\tGAT\tGGA\tGGG\tGGC\tGGT\tGCA\tGCG\
 	GCC\tGCT\tGTA\tGTG\tGTC\tGTT\tCAA\tCAG\tCAC\tCAT\tCGA\tCGG\tCGC\tCGT\tCCA\tCCG\tCCC\
 	CCT\tCTA\tCTG\tCTC\tCTT\tTAA\tTAG\tTAC\tTAT\tTGA\tTGG\tTGC\tTGT\tTCA\tTCG\tTCC\tTCT\
-	TTA\tTTG\tTTC\tTTT')
+	TTA\tTTG\tTTC\tTTT\n')
+	f.close()
 	g = open(genomefile,'r')
 	for line in g :
-		scode, url = line.split("\t")
-		url=url.rstrip("\n")
-		print 'scode '+scode
-		print 'url' +url
-		writelog(logfile,scode+" process starts")
-		process_inputfile(url,scode,logfile)
-		count_nt_freq(scode,resultfile)
-
+		if len(line)>1 :
+			scode, url = line.split()
+			url=url.rstrip("\n")
+			print 'scode '+scode
+			print 'url ' +url
+			writelog(logfile,scode+" process starts")
+			if localfileflag=='NO' :
+				process_inputfile(url,scode,logfile)
+			else :
+				if localfileflag!='YES':
+					writelog(logfile,"Problems with content Input flag. Must be YES or NO"+localfileflag)	
+			count_nt_freq(scode,url,resultfile,logfile,localfileflag)
+	g.close()
+		
 	
 #----------------------------------MAIN-------------------------------------------
 
 import sys
-int_main(sys.argv[1],sys.argv[2])
+int_main(sys.argv[1],sys.argv[2],sys.argv[3])
 
 

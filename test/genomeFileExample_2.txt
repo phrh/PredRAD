@@ -1,0 +1,2 @@
+Nemvec  ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF_000209225.1_ASM20922v1/GCF_000209225.1_ASM20922v1_genomic.fna.gz
+Plaviv  ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF_000002415.2_ASM241v2/GCF_000002415.2_ASM241v2_genomic.fna.gz
